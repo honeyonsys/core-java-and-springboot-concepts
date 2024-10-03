@@ -77,95 +77,9 @@ Here’s a comprehensive list of topics for **Core Java** and **Spring Boot**:
     - PreparedStatement vs Statement
     - Transactions
 
-### **Spring Boot Concepts**
-1. **Spring Core**
-   - Dependency Injection (Constructor Injection, Setter Injection)
-   - Bean Lifecycle and Scopes
-   - @Component, @Service, @Repository Annotations
-   - Spring Configurations (Java-based, XML-based)
-
-2. **Spring Boot Basics**
-   - Spring Boot Annotations (@SpringBootApplication, @Configuration, @EnableAutoConfiguration)
-   - Spring Boot Starters
-   - Application Properties (application.yml / application.properties)
-   - Spring Boot DevTools
-
-3. **Spring MVC**
-   - @Controller and @RestController
-   - Request Mapping (@GetMapping, @PostMapping, etc.)
-   - ModelAndView
-   - Handling Forms and Validations
-   - Exception Handling (@ControllerAdvice)
-
-4. **Spring Boot RESTful Web Services**
-   - Creating REST APIs
-   - @RequestBody and @ResponseBody
-   - HTTP Methods (GET, POST, PUT, DELETE)
-   - Status Codes and ResponseEntity
-   - HATEOAS
-
-5. **Spring Data JPA**
-   - Introduction to JPA
-   - Spring Data Repositories (CrudRepository, JpaRepository)
-   - Custom Queries (JPQL, Native Queries)
-   - Pagination and Sorting
-   - @Entity, @Table, @Id, @GeneratedValue Annotations
-
-6. **Spring Security**
-   - Authentication and Authorization
-   - In-memory Authentication
-   - JWT (JSON Web Token)
-   - Role-Based Access Control
-   - OAuth2
-
-7. **Spring Boot Actuator**
-   - Monitoring and Metrics
-   - Endpoints (Health, Info, Metrics)
-   - Customizing Actuator Endpoints
-
-8. **Spring Boot Testing**
-   - Unit Testing (JUnit, Mockito)
-   - @WebMvcTest, @DataJpaTest, @SpringBootTest Annotations
-   - Integration Testing
-
-9. **Spring Boot with Databases**
-   - Database Configuration
-   - H2 Database (In-Memory Database)
-   - Database Migration using Liquibase/Flyway
-   - Connection Pooling (HikariCP)
-
-10. **Spring Boot with Messaging**
-    - JMS (Java Messaging Service)
-    - RabbitMQ
-    - Kafka Integration
-
-11. **Spring Boot with Microservices**
-    - Introduction to Microservices
-    - Service Discovery (Eureka)
-    - Load Balancing (Ribbon)
-    - API Gateway (Zuul, Spring Cloud Gateway)
-    - Circuit Breaker (Hystrix, Resilience4j)
-    - Feign Clients
-
-12. **Spring Boot Profiles**
-    - Environment-Specific Configurations
-    - @Profile Annotation
-
-13. **Spring Boot Caching**
-    - @Cacheable, @CacheEvict Annotations
-    - Cache Manager (EhCache, Redis)
-
-14. **Spring Boot Scheduling**
-    - @Scheduled Annotation
-    - Task Execution and Scheduling
-
-15. **Spring Boot Logging**
-    - Logback and Log4j2
-    - Externalizing Log Configurations
-
 ---
 
-# Basic Concepts
+# 1. Basic Concepts
 
 ### Variables and Data Types in Java
 
@@ -258,6 +172,8 @@ Instance Variable: 20
 
 This example demonstrates the use of various types of variables in Java, including their scopes and how they are initialized and accessed.
 
+---
+---
 ---
 
 ### Operators in Java
@@ -497,6 +413,7 @@ This example demonstrates the use of various operators such as arithmetic, assig
 
 ---
 ---
+---
 
 ### Control Statements in Java
 
@@ -506,7 +423,7 @@ Control statements are used to control the flow of execution in a program, based
 1. **if Statements**
 2. **switch Statements**
 
-
+---
 
 ### **1. if Statements:**
 
@@ -525,7 +442,7 @@ if (condition) {
 3. **if-else-if ladder**
 4. **Nested `if` statement**
 
-
+---
 
 ### **1.1. Simple `if` Statement:**
 
@@ -540,7 +457,7 @@ if (number > 5) {
 // Output: Number is greater than 5.
 ```
 
-
+---
 
 ### **1.2. if-else Statement:**
 
@@ -566,7 +483,7 @@ if (number > 5) {
 // Output: Number is less than or equal to 5.
 ```
 
-
+---
 
 ### **1.3. if-else-if Ladder:**
 
@@ -597,7 +514,7 @@ if (number > 0 && number <= 10) {
 // Output: Number is between 11 and 20.
 ```
 
-
+---
 
 ### **1.4. Nested `if` Statement:**
 
@@ -624,7 +541,7 @@ if (number > 0) {
 // Output: Number is positive and less than 20.
 ```
 
-
+---
 
 ### **2. switch Statement:**
 
@@ -649,7 +566,7 @@ switch (expression) {
 - Each `case` must end with a `break;` statement to prevent fall-through (executing subsequent cases).
 - The `default` case is optional but is executed if no case matches the expression.
 
-
+---
 
 ### **2.1. Example of a `switch` Statement:**
 ```java
@@ -683,7 +600,7 @@ switch (day) {
 // Output: Tuesday
 ```
 
-
+---
 
 ### **2.2. Using `switch` with Strings (Java 7 and above):**
 In Java 7, `switch` was enhanced to allow String comparisons.
@@ -705,7 +622,7 @@ switch (color) {
 // Output: You chose Red.
 ```
 
-
+---
 
 ### **2.3. `switch` with Enums:**
 Enums (enumerated types) can also be used in `switch` statements.
@@ -730,7 +647,7 @@ switch (day) {
 // Output: Monday
 ```
 
-
+---
 
 ### **Complete Example Using Both `if` and `switch`:**
 ```java
@@ -772,7 +689,7 @@ Number is positive.
 April
 ```
 
-
+---
 
 ### Summary of Control Statements:
 
@@ -781,3 +698,214 @@ April
 - **if-else-if ladder**: Used for multiple conditions in a sequence.
 - **switch statement**: Selects and executes one block of code based on a variable's value. It is generally more readable than an `if-else-if` ladder when there are many constant comparisons.
 
+---
+---
+---
+
+### Loops in Java
+
+Loops allow a block of code to be executed repeatedly based on a condition. The loop will keep executing the block until the specified condition evaluates to false. Java provides three main types of loops:
+
+1. **for loop**
+2. **while loop**
+3. **do-while loop**
+
+---
+
+### **1. for Loop:**
+
+The `for` loop is used when you know in advance how many times you want to iterate over a block of code. It is the most commonly used loop for definite iterations.
+
+#### **Syntax:**
+```java
+for (initialization; condition; update) {
+    // Code to execute in each iteration
+}
+```
+
+- **initialization**: Initializes a loop counter or a control variable, executed only once.
+- **condition**: Checks the condition before every iteration. If true, the loop body is executed; if false, the loop terminates.
+- **update**: Increments or decrements the loop counter after every iteration.
+
+#### **Example:**
+```java
+for (int i = 1; i <= 5; i++) {
+    System.out.println("Iteration: " + i);
+}
+// Output:
+// Iteration: 1
+// Iteration: 2
+// Iteration: 3
+// Iteration: 4
+// Iteration: 5
+```
+
+---
+
+### **1.1. Enhanced for Loop (for-each):**
+
+This loop is mainly used to iterate over collections such as arrays or lists.
+
+#### **Syntax:**
+```java
+for (dataType variable : collection) {
+    // Code to execute for each item in the collection
+}
+```
+
+#### **Example:**
+```java
+int[] numbers = {10, 20, 30, 40, 50};
+for (int num : numbers) {
+    System.out.println("Number: " + num);
+}
+// Output:
+// Number: 10
+// Number: 20
+// Number: 30
+// Number: 40
+// Number: 50
+```
+
+---
+
+### **2. while Loop:**
+
+The `while` loop is used when you want to repeat a block of code as long as a condition is true. It checks the condition before executing the loop body.
+
+#### **Syntax:**
+```java
+while (condition) {
+    // Code to execute as long as condition is true
+}
+```
+
+- **condition**: The condition is checked before entering the loop. If it's true, the loop continues to execute.
+
+#### **Example:**
+```java
+int i = 1;
+while (i <= 5) {
+    System.out.println("Iteration: " + i);
+    i++;  // Increment the counter
+}
+// Output:
+// Iteration: 1
+// Iteration: 2
+// Iteration: 3
+// Iteration: 4
+// Iteration: 5
+```
+
+---
+
+### **3. do-while Loop:**
+
+The `do-while` loop is similar to the `while` loop, but with one key difference: it will execute the loop body **at least once** before checking the condition. This means the block of code runs first, and the condition is checked afterward.
+
+#### **Syntax:**
+```java
+do {
+    // Code to execute at least once
+} while (condition);
+```
+
+- **condition**: After executing the loop body, the condition is checked. If it's true, the loop continues; if false, the loop stops.
+
+#### **Example:**
+```java
+int i = 1;
+do {
+    System.out.println("Iteration: " + i);
+    i++;  // Increment the counter
+} while (i <= 5);
+// Output:
+// Iteration: 1
+// Iteration: 2
+// Iteration: 3
+// Iteration: 4
+// Iteration: 5
+```
+
+---
+
+### **Comparison of Loops:**
+
+| Loop Type      | Condition Check | Use Case |
+|----------------|-----------------|----------|
+| `for` loop     | Before each iteration | When the number of iterations is known |
+| `while` loop   | Before each iteration | When the number of iterations is unknown, but condition is needed first |
+| `do-while` loop| After each iteration  | When the loop must execute at least once |
+
+---
+
+### **Complete Example of All Loops:**
+
+```java
+public class LoopExamples {
+    public static void main(String[] args) {
+        
+        // for loop example
+        System.out.println("for loop:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Iteration: " + i);
+        }
+        
+        // while loop example
+        System.out.println("\nwhile loop:");
+        int j = 1;
+        while (j <= 5) {
+            System.out.println("Iteration: " + j);
+            j++;
+        }
+        
+        // do-while loop example
+        System.out.println("\ndo-while loop:");
+        int k = 1;
+        do {
+            System.out.println("Iteration: " + k);
+            k++;
+        } while (k <= 5);
+    }
+}
+```
+
+#### **Output:**
+```
+for loop:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+Iteration: 5
+
+while loop:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+Iteration: 5
+
+do-while loop:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+Iteration: 5
+```
+
+---
+
+### Summary:
+
+- **`for` loop**: Best for iterating a known number of times.
+- **`while` loop**: Best for iterating until a condition becomes false.
+- **`do-while` loop**: Ensures the block runs at least once, regardless of the condition.
+
+These loops are essential for controlling the flow of execution when repetitive tasks are involved.
+
+---
+---
+---
+
+# 2. Object-Oriented Programming (OOP)
