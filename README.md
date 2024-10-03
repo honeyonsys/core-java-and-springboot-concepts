@@ -494,3 +494,290 @@ Bitwise AND: 0
 ```
 
 This example demonstrates the use of various operators such as arithmetic, assignment, relational, logical, ternary, and bitwise operators.
+
+---
+---
+
+### Control Statements in Java
+
+Control statements are used to control the flow of execution in a program, based on certain conditions. They help make decisions (conditional execution) or execute code repetitively (loops). Here, we will focus on **decision-making** control statements: `if` and `switch`.
+
+#### **Types of Control Statements:**
+1. **if Statements**
+2. **switch Statements**
+
+
+
+### **1. if Statements:**
+
+The `if` statement allows a block of code to be executed based on a condition. If the condition is true, the block of code inside the `if` statement will run; otherwise, it will be skipped.
+
+#### **Syntax:**
+```java
+if (condition) {
+    // Code to execute if condition is true
+}
+```
+
+#### **Types of `if` Statements:**
+1. **Simple `if` statement**
+2. **if-else statement**
+3. **if-else-if ladder**
+4. **Nested `if` statement**
+
+
+
+### **1.1. Simple `if` Statement:**
+
+This executes a block of code if the condition is true.
+
+#### **Example:**
+```java
+int number = 10;
+if (number > 5) {
+    System.out.println("Number is greater than 5.");
+}
+// Output: Number is greater than 5.
+```
+
+
+
+### **1.2. if-else Statement:**
+
+This executes one block of code if the condition is true, and another block if the condition is false.
+
+#### **Syntax:**
+```java
+if (condition) {
+    // Code to execute if condition is true
+} else {
+    // Code to execute if condition is false
+}
+```
+
+#### **Example:**
+```java
+int number = 3;
+if (number > 5) {
+    System.out.println("Number is greater than 5.");
+} else {
+    System.out.println("Number is less than or equal to 5.");
+}
+// Output: Number is less than or equal to 5.
+```
+
+
+
+### **1.3. if-else-if Ladder:**
+
+This is used when multiple conditions need to be checked in sequence. The first block whose condition is true gets executed, and the rest are skipped.
+
+#### **Syntax:**
+```java
+if (condition1) {
+    // Code to execute if condition1 is true
+} else if (condition2) {
+    // Code to execute if condition2 is true
+} else {
+    // Code to execute if none of the above conditions are true
+}
+```
+
+#### **Example:**
+```java
+int number = 20;
+
+if (number > 0 && number <= 10) {
+    System.out.println("Number is between 1 and 10.");
+} else if (number > 10 && number <= 20) {
+    System.out.println("Number is between 11 and 20.");
+} else {
+    System.out.println("Number is greater than 20.");
+}
+// Output: Number is between 11 and 20.
+```
+
+
+
+### **1.4. Nested `if` Statement:**
+
+An `if` statement inside another `if` statement is called nested `if`. It is useful when one condition depends on another.
+
+#### **Syntax:**
+```java
+if (condition1) {
+    if (condition2) {
+        // Code to execute if both conditions are true
+    }
+}
+```
+
+#### **Example:**
+```java
+int number = 15;
+
+if (number > 0) {
+    if (number < 20) {
+        System.out.println("Number is positive and less than 20.");
+    }
+}
+// Output: Number is positive and less than 20.
+```
+
+
+
+### **2. switch Statement:**
+
+The `switch` statement is used to execute one block of code among multiple options based on the value of a variable. It is an alternative to the `if-else-if` ladder, typically used when a variable needs to be compared with multiple constant values.
+
+#### **Syntax:**
+```java
+switch (expression) {
+    case value1:
+        // Code to execute if expression equals value1
+        break;
+    case value2:
+        // Code to execute if expression equals value2
+        break;
+    // Add more cases as needed
+    default:
+        // Code to execute if none of the above cases match
+}
+```
+
+#### **Key Points:**
+- Each `case` must end with a `break;` statement to prevent fall-through (executing subsequent cases).
+- The `default` case is optional but is executed if no case matches the expression.
+
+
+
+### **2.1. Example of a `switch` Statement:**
+```java
+int day = 3;
+
+switch (day) {
+    case 1:
+        System.out.println("Sunday");
+        break;
+    case 2:
+        System.out.println("Monday");
+        break;
+    case 3:
+        System.out.println("Tuesday");
+        break;
+    case 4:
+        System.out.println("Wednesday");
+        break;
+    case 5:
+        System.out.println("Thursday");
+        break;
+    case 6:
+        System.out.println("Friday");
+        break;
+    case 7:
+        System.out.println("Saturday");
+        break;
+    default:
+        System.out.println("Invalid day");
+}
+// Output: Tuesday
+```
+
+
+
+### **2.2. Using `switch` with Strings (Java 7 and above):**
+In Java 7, `switch` was enhanced to allow String comparisons.
+
+#### **Example:**
+```java
+String color = "Red";
+
+switch (color) {
+    case "Red":
+        System.out.println("You chose Red.");
+        break;
+    case "Blue":
+        System.out.println("You chose Blue.");
+        break;
+    default:
+        System.out.println("Color not recognized.");
+}
+// Output: You chose Red.
+```
+
+
+
+### **2.3. `switch` with Enums:**
+Enums (enumerated types) can also be used in `switch` statements.
+
+#### **Example:**
+```java
+enum Day { SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY }
+
+Day day = Day.MONDAY;
+
+switch (day) {
+    case SUNDAY:
+        System.out.println("Sunday");
+        break;
+    case MONDAY:
+        System.out.println("Monday");
+        break;
+    // Add other cases here
+    default:
+        System.out.println("Invalid day");
+}
+// Output: Monday
+```
+
+
+
+### **Complete Example Using Both `if` and `switch`:**
+```java
+public class ControlStatementsDemo {
+    public static void main(String[] args) {
+        // Example of if-else
+        int number = 15;
+        if (number > 0) {
+            System.out.println("Number is positive.");
+        } else {
+            System.out.println("Number is negative or zero.");
+        }
+
+        // Example of switch
+        int month = 4;
+        switch (month) {
+            case 1:
+                System.out.println("January");
+                break;
+            case 2:
+                System.out.println("February");
+                break;
+            case 3:
+                System.out.println("March");
+                break;
+            case 4:
+                System.out.println("April");
+                break;
+            default:
+                System.out.println("Invalid month");
+        }
+    }
+}
+```
+
+### **Output:**
+```
+Number is positive.
+April
+```
+
+
+
+### Summary of Control Statements:
+
+- **if statement**: Executes code based on a condition.
+- **if-else statement**: Chooses between two blocks of code based on a condition.
+- **if-else-if ladder**: Used for multiple conditions in a sequence.
+- **switch statement**: Selects and executes one block of code based on a variable's value. It is generally more readable than an `if-else-if` ladder when there are many constant comparisons.
+
