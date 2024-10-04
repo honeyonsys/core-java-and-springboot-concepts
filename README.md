@@ -7660,3 +7660,641 @@ In this example:
 ---
 
 # 13. JDBC (Java Database Connectivity)
+
+### Establishing a Connection in Java
+
+In Java, establishing a connection to a server can be done in different ways depending on the protocol (e.g., HTTP, FTP, TCP). Below, we’ll cover establishing connections using two common protocols: **HTTP** and **TCP** (sockets). Each protocol has its own API and classes in the `java.net` package.
+
+---
+
+### 1. **HTTP Connection Using HttpURLConnection**
+In the context of web-based communication, the **HttpURLConnection** class is used to establish an HTTP connection. The connection can be used for interacting with web servers via HTTP methods such as `GET`, `POST`, `PUT`, and `DELETE`.
+
+#### Steps to Establish an HTTP Connection:
+1. Create a `URL` object.
+2. Use the `openConnection()` method to create an `HttpURLConnection`.
+3. Set the request method (e.g., `GET` or `POST`).
+4. Optionally set request properties (headers).
+5. Optionally send data (for `POST` requests).
+6. Read the response.
+
+#### Example: Establishing an HTTP Connection
+```java
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class HttpConnectionExample {
+    public static void main(String[] args) {
+        try {
+            // Step 1: Create a URL object
+            URL url = new URL("https://jsonplaceholder.typicode.com/posts/1");
+
+            // Step 2: Open the connection
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Step 3: Set the request method (GET in this case)
+            connection.setRequestMethod("GET");
+
+            // Optional: Set request headers (e.g., User-Agent, Content-Type)
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+            // Step 4: Get the response code
+            int responseCode = connection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            // Step 5: Read the response if the request was successful
+            if (responseCode == HttpURLConnection.HTTP_OK) { // status code 200
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                // Step 6: Print the response content
+                System.out.println("Response: " + response.toString());
+            } else {
+                System.out.println("GET request failed.");
+            }
+
+            // Step 7: Disconnect
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Key Points:
+- The connection is established when the `openConnection()` method is called.
+- The `HttpURLConnection` object is used to send the HTTP request and handle the response.
+- The `getResponseCode()` method returns the server’s response code (e.g., 200 for success).
+- You can then read the server's response using the input stream.
+
+---
+
+### 2. **TCP Connection Using Sockets**
+For lower-level network communication, such as between client and server applications, you can use **sockets**. A socket represents one endpoint in a two-way communication link. Java provides the `Socket` class for establishing TCP connections.
+
+#### Steps to Establish a TCP Connection:
+1. Create a `Socket` object specifying the server’s address and port number.
+2. Get input and output streams from the socket for communication.
+3. Optionally send and receive data.
+4. Close the socket when done.
+
+#### Example: Establishing a TCP Socket Connection
+This example demonstrates a client establishing a connection to a server over TCP.
+
+```java
+import java.io.*;
+import java.net.Socket;
+
+public class TCPClient {
+    public static void main(String[] args) {
+        String serverName = "localhost"; // or use IP address
+        int port = 8080; // server port number
+
+        try {
+            // Step 1: Create a socket to connect to the server
+            Socket client = new Socket(serverName, port);
+            System.out.println("Connected to server at " + serverName + " on port " + port);
+
+            // Step 2: Get the output stream to send data to the server
+            OutputStream outToServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+
+            // Step 3: Send a message to the server
+            out.writeUTF("Hello from client!");
+
+            // Step 4: Get the input stream to receive data from the server
+            InputStream inFromServer = client.getInputStream();
+            DataInputStream in = new DataInputStream(inFromServer);
+
+            // Step 5: Read the server's response
+            System.out.println("Server says: " + in.readUTF());
+
+            // Step 6: Close the connection
+            client.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Server Side Example:
+To test the above client code, you need a server that listens on the same port. Here's an example of a simple TCP server:
+
+```java
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class TCPServer {
+    public static void main(String[] args) {
+        int port = 8080;
+
+        try {
+            // Step 1: Create a server socket to listen on the specified port
+            ServerSocket serverSocket = new ServerSocket(port);
+            System.out.println("Server is listening on port " + port);
+
+            while (true) {
+                // Step 2: Accept a connection from a client
+                Socket server = serverSocket.accept();
+                System.out.println("Client connected");
+
+                // Step 3: Get input and output streams
+                DataInputStream in = new DataInputStream(server.getInputStream());
+                DataOutputStream out = new DataOutputStream(server.getOutputStream());
+
+                // Step 4: Read the client's message
+                String clientMessage = in.readUTF();
+                System.out.println("Client says: " + clientMessage);
+
+                // Step 5: Send a response back to the client
+                out.writeUTF("Hello from server!");
+
+                // Close the connection
+                server.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Key Points:
+- The client establishes the connection to the server using `Socket`.
+- Communication occurs through input and output streams (I/O).
+- The server listens on a specific port using `ServerSocket`.
+- The connection is closed by calling `client.close()` or `server.close()` when done.
+
+---
+
+### Summary:
+- **HTTP Connections** can be established using the `HttpURLConnection` class for interacting with web servers over HTTP.
+- **TCP Connections** can be established using **sockets** (`Socket` and `ServerSocket` classes) for direct communication between clients and servers at a lower level than HTTP.
+
+Both mechanisms enable communication over the network, but the choice of protocol (HTTP or TCP) depends on the specific application requirements.
+
+---
+---
+---
+
+### CRUD Operations
+
+CRUD stands for **Create, Read, Update, and Delete**. These are the four fundamental operations that are typically performed in a database or data-driven application. They represent basic operations used to interact with a database or a persistent storage system.
+
+- **Create**: Inserting new data into the database.
+- **Read**: Retrieving data from the database.
+- **Update**: Modifying existing data in the database.
+- **Delete**: Removing data from the database.
+
+Each of these operations corresponds to a specific SQL statement or method in database operations, and can be implemented in various programming languages, including Java.
+
+Let's go through each operation in detail with an example, where we interact with a **MySQL database** using **Java** and **JDBC (Java Database Connectivity)**.
+
+---
+
+### 1. **Create (Insert)**
+The **Create** operation involves inserting a new record into the database.
+
+#### SQL:
+```sql
+INSERT INTO users (id, name, email) VALUES (?, ?, ?);
+```
+
+#### Java Example:
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class CreateExample {
+    public static void main(String[] args) {
+        try {
+            // Step 1: Establish connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "password");
+
+            // Step 2: Create a SQL Insert query
+            String sql = "INSERT INTO users (id, name, email) VALUES (?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, 1);  // ID
+            statement.setString(2, "John Doe");  // Name
+            statement.setString(3, "john.doe@example.com");  // Email
+
+            // Step 3: Execute the query
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new user was inserted successfully!");
+            }
+
+            // Step 4: Close the connection
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+---
+
+### 2. **Read (Select)**
+The **Read** operation involves retrieving data from the database.
+
+#### SQL:
+```sql
+SELECT * FROM users WHERE id = ?;
+```
+
+#### Java Example:
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class ReadExample {
+    public static void main(String[] args) {
+        try {
+            // Step 1: Establish connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "password");
+
+            // Step 2: Create a SQL Select query
+            String sql = "SELECT * FROM users WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, 1);  // ID to retrieve
+
+            // Step 3: Execute the query and get the result
+            ResultSet result = statement.executeQuery();
+
+            // Step 4: Process the result
+            while (result.next()) {
+                int id = result.getInt("id");
+                String name = result.getString("name");
+                String email = result.getString("email");
+                System.out.println("ID: " + id + ", Name: " + name + ", Email: " + email);
+            }
+
+            // Step 5: Close the connection
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+---
+
+### 3. **Update**
+The **Update** operation modifies existing data in the database.
+
+#### SQL:
+```sql
+UPDATE users SET name = ?, email = ? WHERE id = ?;
+```
+
+#### Java Example:
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class UpdateExample {
+    public static void main(String[] args) {
+        try {
+            // Step 1: Establish connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "password");
+
+            // Step 2: Create a SQL Update query
+            String sql = "UPDATE users SET name = ?, email = ? WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, "Jane Doe");  // Updated name
+            statement.setString(2, "jane.doe@example.com");  // Updated email
+            statement.setInt(3, 1);  // ID to update
+
+            // Step 3: Execute the update
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("An existing user was updated successfully!");
+            }
+
+            // Step 4: Close the connection
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+---
+
+### 4. **Delete**
+The **Delete** operation removes data from the database.
+
+#### SQL:
+```sql
+DELETE FROM users WHERE id = ?;
+```
+
+#### Java Example:
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class DeleteExample {
+    public static void main(String[] args) {
+        try {
+            // Step 1: Establish connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "password");
+
+            // Step 2: Create a SQL Delete query
+            String sql = "DELETE FROM users WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, 1);  // ID to delete
+
+            // Step 3: Execute the delete
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("A user was deleted successfully!");
+            }
+
+            // Step 4: Close the connection
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+---
+
+### Summary:
+
+- **Create**: Adds a new entry to the database using `INSERT`.
+- **Read**: Retrieves data using `SELECT`.
+- **Update**: Modifies existing data using `UPDATE`.
+- **Delete**: Removes data using `DELETE`.
+
+These CRUD operations are the backbone of data persistence in databases, and they can be implemented in most programming languages that support database interactions.
+
+---
+---
+---
+
+### **PreparedStatement vs Statement** in Java
+
+When interacting with databases in Java using **JDBC**, two primary interfaces are used to execute SQL queries: **`Statement`** and **`PreparedStatement`**. Both allow communication with the database but differ in terms of functionality, security, and performance.
+
+---
+
+### **1. Statement**
+
+- **Definition**: The `Statement` interface is used for executing static SQL queries that do not require parameters. It is typically used for simple SQL commands like creating tables or performing basic CRUD operations (Create, Read, Update, Delete).
+  
+- **Use Case**: Best for executing simple and static SQL queries without parameters.
+  
+- **How it works**: Each time you execute an SQL query with `Statement`, the query is first compiled by the database, and then executed.
+
+- **SQL Injection Vulnerability**: Since the SQL query is constructed by concatenating user input directly, `Statement` is vulnerable to SQL injection attacks if inputs are not properly sanitized.
+
+#### **Example: Statement Usage**
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class StatementExample {
+    public static void main(String[] args) {
+        try {
+            // Step 1: Establish connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "password");
+
+            // Step 2: Create a Statement
+            Statement statement = conn.createStatement();
+            String sql = "INSERT INTO users (id, name, email) VALUES (1, 'John Doe', 'john.doe@example.com')";
+
+            // Step 3: Execute the SQL query
+            int rowsInserted = statement.executeUpdate(sql);
+
+            if (rowsInserted > 0) {
+                System.out.println("A new user was inserted successfully!");
+            }
+
+            // Step 4: Close the connection
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+- **Advantages**:
+  - Simple to use for static queries.
+  - Useful for executing SQL queries without parameters.
+
+- **Disadvantages**:
+  - **SQL Injection Vulnerability**: If user input is directly concatenated into the SQL query, attackers can manipulate the query.
+  - **Recompiled Each Time**: The query is parsed and compiled by the database every time it is executed, leading to slower performance for repeated queries.
+
+---
+
+### **2. PreparedStatement**
+
+- **Definition**: The `PreparedStatement` interface is used to execute parameterized SQL queries. This allows you to safely and efficiently include user input in queries without risking SQL injection.
+
+- **Use Case**: Best for queries that contain dynamic parameters or are executed multiple times (e.g., repeated inserts, updates, or selects with different values).
+
+- **How it works**: The SQL query with placeholders (`?`) is precompiled once, and then values can be inserted into the placeholders when the query is executed. This makes it more efficient and safer than `Statement`.
+
+- **Prevention of SQL Injection**: Since the query structure is precompiled, and parameters are inserted separately, user input is automatically escaped, preventing SQL injection attacks.
+
+#### **Example: PreparedStatement Usage**
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class PreparedStatementExample {
+    public static void main(String[] args) {
+        try {
+            // Step 1: Establish connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "password");
+
+            // Step 2: Create a PreparedStatement
+            String sql = "INSERT INTO users (id, name, email) VALUES (?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, 2);  // Set ID
+            preparedStatement.setString(2, "Jane Doe");  // Set Name
+            preparedStatement.setString(3, "jane.doe@example.com");  // Set Email
+
+            // Step 3: Execute the SQL query
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                System.out.println("A new user was inserted successfully!");
+            }
+
+            // Step 4: Close the connection
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+- **Advantages**:
+  - **Prevents SQL Injection**: Since parameters are bound to the query safely, it prevents SQL injection attacks.
+  - **Improved Performance**: The SQL query is compiled only once, even if executed multiple times with different parameter values.
+  - **Reusability**: It allows setting parameters dynamically for the same query, making it more efficient in scenarios with repeated queries.
+  - **Type Safety**: It automatically handles the conversion of data types between Java and SQL.
+
+- **Disadvantages**:
+  - More complex compared to `Statement` when dealing with simple queries.
+  - Requires more setup for executing queries without parameters.
+
+---
+
+### **Key Differences Between Statement and PreparedStatement**
+
+| **Feature**                | **`Statement`**                           | **`PreparedStatement`**                               |
+|----------------------------|-------------------------------------------|-------------------------------------------------------|
+| **Query Type**              | Static SQL queries without parameters     | Parameterized SQL queries (with `?` placeholders)      |
+| **SQL Injection Protection**| Vulnerable                                | Protected (parameters are safely bound)               |
+| **Query Compilation**       | Compiled every time it's executed         | Compiled once, reused with different parameter values  |
+| **Performance**             | Slower for repeated queries               | Faster for repeated queries due to pre-compilation     |
+| **Parameterization**        | Manual concatenation of parameters        | Parameters are automatically handled and type-checked |
+| **Best Use Case**           | Simple queries without user input         | Queries with dynamic parameters or repeated execution |
+
+---
+
+### Summary:
+
+- **Use `Statement`**: For simple and static queries where no user input is involved, and you don’t need to execute the same query multiple times.
+- **Use `PreparedStatement`**: For queries that involve dynamic input or need to be executed repeatedly with different values. It provides better security (against SQL injection) and better performance in repeated executions.
+
+In general, **`PreparedStatement`** is preferred due to its safety, efficiency, and flexibility.
+
+---
+---
+---
+
+### **Transactions in Java (JDBC)**
+
+A **transaction** in the context of databases refers to a sequence of one or more SQL operations that are executed as a single unit of work. Transactions are essential for maintaining data integrity and ensuring that operations on the database are reliable. They follow the **ACID properties**, which ensure that transactions are processed reliably.
+
+### **ACID Properties**
+
+1. **Atomicity**: 
+   - A transaction is treated as a single unit, meaning either all operations in the transaction are completed successfully, or none of them are applied. If any operation fails, the entire transaction is rolled back to maintain data consistency.
+
+2. **Consistency**:
+   - A transaction brings the database from one valid state to another valid state, ensuring that all rules and constraints (like foreign keys, unique constraints) are followed.
+
+3. **Isolation**:
+   - Transactions are isolated from one another. The operations of one transaction are not visible to others until the transaction is committed. This prevents issues like dirty reads or lost updates.
+
+4. **Durability**:
+   - Once a transaction has been committed, the changes made by it are permanent, even in the event of a system failure.
+
+### **Using Transactions in Java JDBC**
+
+In JDBC, transactions are managed through the `Connection` interface, which provides methods to commit and roll back transactions. By default, JDBC operates in **auto-commit mode**, where each individual SQL statement is treated as a transaction. To manage transactions manually, auto-commit mode needs to be disabled.
+
+### **Steps to Manage Transactions**
+
+1. **Disable Auto-Commit Mode**: Before executing the transaction, turn off auto-commit mode.
+2. **Execute SQL Operations**: Perform all the operations that are part of the transaction.
+3. **Commit the Transaction**: If all operations are successful, commit the transaction to make the changes permanent.
+4. **Rollback the Transaction**: If any operation fails, roll back the transaction to undo all changes made during the transaction.
+
+#### **Example: Using Transactions in JDBC**
+
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TransactionExample {
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            // Step 1: Establish a connection
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "password");
+            
+            // Step 2: Disable auto-commit mode
+            conn.setAutoCommit(false);
+
+            // Step 3: Create a Statement
+            stmt = conn.createStatement();
+
+            // Execute multiple SQL operations
+            String sql1 = "INSERT INTO users (id, name, email) VALUES (1, 'John Doe', 'john.doe@example.com')";
+            stmt.executeUpdate(sql1);
+
+            String sql2 = "INSERT INTO users (id, name, email) VALUES (2, 'Jane Doe', 'jane.doe@example.com')";
+            stmt.executeUpdate(sql2);
+            
+            // Step 4: Commit the transaction if successful
+            conn.commit();
+            System.out.println("Transaction committed successfully!");
+
+        } catch (SQLException e) {
+            // Step 5: Rollback the transaction in case of an error
+            if (conn != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    conn.rollback();
+                } catch (SQLException excep) {
+                    excep.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            // Step 6: Clean up and close the connection
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+### **Key Points:**
+
+- **Auto-commit**: By default, JDBC uses auto-commit mode. To manage transactions manually, set `auto-commit` to `false` using `conn.setAutoCommit(false)`.
+- **Committing Changes**: Use `conn.commit()` to save changes made in the transaction.
+- **Rolling Back Changes**: In case of an exception or error, use `conn.rollback()` to revert all changes made during the transaction.
+- **Exception Handling**: Always handle exceptions during transaction management to ensure that resources are cleaned up properly and that the transaction is rolled back when necessary.
+
+### **When to Use Transactions:**
+
+- When executing multiple related SQL statements that need to be treated as a single unit.
+- In scenarios where maintaining data integrity is critical, such as financial transactions, user registration processes, or multi-table updates.
+
+### Summary
+
+Transactions are a crucial aspect of database management in Java applications, ensuring that operations are executed reliably and maintaining the integrity of the data. By understanding and effectively using transactions, you can build robust applications that handle data consistently and safely.
+
