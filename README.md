@@ -8298,3 +8298,4 @@ public class TransactionExample {
 
 Transactions are a crucial aspect of database management in Java applications, ensuring that operations are executed reliably and maintaining the integrity of the data. By understanding and effectively using transactions, you can build robust applications that handle data consistently and safely.
 
+
