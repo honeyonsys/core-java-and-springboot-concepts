@@ -1,5 +1,5 @@
 ### **Spring Boot Concepts**
-1. **Spring Core**
+1. <a href="#springCore">**Spring Core**</a>
    - Dependency Injection (Constructor Injection, Setter Injection)
    - Bean Lifecycle and Scopes
    - @Component, @Service, @Repository Annotations
@@ -85,7 +85,7 @@
     - Externalizing Log Configurations
 
 ---
-# 1. Spring Core
+# <a name="springCore">1. Spring Core</a>
 
 ### **Dependency Injection (DI)**
 
