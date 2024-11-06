@@ -85,7 +85,7 @@
     - Externalizing Log Configurations
 
 ---
-# <a name="springCore">1. Spring Core</a>
+# <a id="springCore">1. Spring Core</a>
 
 ### **Dependency Injection (DI)**
 
