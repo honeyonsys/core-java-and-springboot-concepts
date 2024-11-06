@@ -3054,7 +3054,7 @@ The `CrudRepository` interface is the simplest and most basic interface in Sprin
 
 #### **Methods in CrudRepository**
 - **save(S entity)**: Saves a given entity.
-- **saveAll(Iterable<S> entities)**: Saves all given entities.
+- **saveAll(Iterable entities)**: Saves all given entities.
 - **findById(ID id)**: Retrieves an entity by its ID.
 - **existsById(ID id)**: Checks if an entity exists by its ID.
 - **findAll()**: Retrieves all entities.
