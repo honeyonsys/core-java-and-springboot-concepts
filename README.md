@@ -1,13 +1,13 @@
 Here’s a comprehensive list of topics for **Core Java** and **Spring Boot**:
 
 ### **Core Java Concepts**
-1. **Basic Concepts**
+1. [**Basic Concepts**](#1-basic-concepts)
    - Variables and Data Types
    - Operators
    - Control Statements (if, switch)
    - Loops (for, while, do-while)
 
-2. **Object-Oriented Programming (OOP)**
+2. [**Object-Oriented Programming (OOP)**](#2-object-oriented-programming-oop)
    - Classes and Objects
    - Constructors
    - Inheritance
@@ -17,19 +17,19 @@ Here’s a comprehensive list of topics for **Core Java** and **Spring Boot**:
    - Static and Final Keywords
    - Nested Classes
 
-3. **Exception Handling**
+3. [**Exception Handling**](#3-exception-handling)
    - try-catch
    - throw and throws
    - finally
    - Custom Exceptions
 
-4. **Collections Framework**
+4. [**Collections Framework**](#4-collections-framework)
    - List, Set, Map Interfaces
    - ArrayList, LinkedList, HashSet, TreeSet, HashMap, LinkedHashMap, TreeMap
    - Iterator and ListIterator
    - Comparable and Comparator
 
-5. **Multithreading and Concurrency**
+5. [**Multithreading and Concurrency**](#5-multithreading-and-concurrency)
    - Thread Lifecycle
    - Creating Threads (Thread Class, Runnable Interface)
    - Synchronization
@@ -37,12 +37,12 @@ Here’s a comprehensive list of topics for **Core Java** and **Spring Boot**:
    - Concurrency Utilities (CountDownLatch, Semaphore, CyclicBarrier)
    - Deadlock, Race Conditions
 
-6. **Java I/O**
+6. [**Java I/O**](#6-java-io)
    - File Handling (FileReader, FileWriter, BufferedReader, BufferedWriter)
    - Byte Streams vs Character Streams
    - Serialization and Deserialization
 
-7. **Java 8 Features**
+7. [**Java 8 Features**](#7-java-8-features)
    - Lambda Expressions
    - Stream API
    - Optional Class
@@ -50,28 +50,28 @@ Here’s a comprehensive list of topics for **Core Java** and **Spring Boot**:
    - Method References
    - Default and Static Methods in Interfaces
 
-8. **Generics**
+8. [**Generics**](#8-generics)
    - Generic Classes
    - Bounded Types
    - Wildcards
 
-9. **Java Memory Management**
+9. [**Java Memory Management**](#9-java-memory-management)
    - Stack vs Heap Memory
    - Garbage Collection
    - JVM, JDK, JRE
 
-10. **Annotations**
+10. [**Annotations**](#10-annotations)
     - Built-in Annotations
     - Custom Annotations
 
-11. **Reflection API**
+11. [**Reflection API**](#11-reflection-api)
     - Accessing Methods and Fields at Runtime
 
-12. **Networking in Java**
+12. [**Networking in Java**](#12-networking-in-java)
     - Sockets (TCP, UDP)
     - URL and HttpURLConnection
 
-13. **JDBC (Java Database Connectivity)**
+13. [**JDBC (Java Database Connectivity)**](#13-jdbc-java-database-connectivity)
     - Establishing Connection
     - CRUD Operations
     - PreparedStatement vs Statement
