@@ -1,66 +1,66 @@
 ### **Spring Boot Concepts**
 1. [**Spring Core**](#1-spring-core)
-   - [Dependency Injection (Constructor Injection, Setter Injection)](Dependency Injection (DI))
-   - Bean Lifecycle and Scopes
-   - @Component, @Service, @Repository Annotations
+   - [Dependency Injection (Constructor Injection, Setter Injection)](#dependency-injection-di)
+   - [Bean Lifecycle and Scopes](#bean-lifecycle-stages)
+   - [@Component, @Service, @Repository Annotations](#1-component)
    - Spring Configurations (Java-based, XML-based)
 
-2. **Spring Boot Basics**
+2. [**Spring Boot Basics**](#2-spring-boot-basics)
    - Spring Boot Annotations (@SpringBootApplication, @Configuration, @EnableAutoConfiguration)
    - Spring Boot Starters
    - Application Properties (application.yml / application.properties)
    - Spring Boot DevTools
 
-3. **Spring MVC**
+3. [**Spring MVC**](#3-spring-mvc)
    - @Controller and @RestController
    - Request Mapping (@GetMapping, @PostMapping, etc.)
    - ModelAndView
    - Handling Forms and Validations
    - Exception Handling (@ControllerAdvice)
 
-4. **Spring Boot RESTful Web Services**
+4. [**Spring Boot RESTful Web Services**](#4-spring-boot-restful-web-services)
    - Creating REST APIs
    - @RequestBody and @ResponseBody
    - HTTP Methods (GET, POST, PUT, DELETE)
    - Status Codes and ResponseEntity
    - HATEOAS
 
-5. **Spring Data JPA**
+5. [**Spring Data JPA**](#5-spring-data-jpa)
    - Introduction to JPA
    - Spring Data Repositories (CrudRepository, JpaRepository)
    - Custom Queries (JPQL, Native Queries)
    - Pagination and Sorting
    - @Entity, @Table, @Id, @GeneratedValue Annotations
 
-6. **Spring Security**
+6. [**Spring Security**](#6-spring-security)
    - Authentication and Authorization
    - In-memory Authentication
    - JWT (JSON Web Token)
    - Role-Based Access Control
    - OAuth2
 
-7. **Spring Boot Actuator**
+7. [**Spring Boot Actuator**](#spring-boot-actuator)
    - Monitoring and Metrics
    - Endpoints (Health, Info, Metrics)
    - Customizing Actuator Endpoints
 
-8. **Spring Boot Testing**
+8. [**Spring Boot Testing**](#8-spring-boot-testing)
    - Unit Testing (JUnit, Mockito)
    - @WebMvcTest, @DataJpaTest, @SpringBootTest Annotations
    - Integration Testing
 
-9. **Spring Boot with Databases**
+9. [**Spring Boot with Databases**](#9-spring-boot-with-databases)
    - Database Configuration
    - H2 Database (In-Memory Database)
    - Database Migration using Liquibase/Flyway
    - Connection Pooling (HikariCP)
 
-10. **Spring Boot with Messaging**
+10. [**Spring Boot with Messaging**](#10-spring-boot-with-messaging)
     - JMS (Java Messaging Service)
     - RabbitMQ
     - Kafka Integration
 
-11. **Spring Boot with Microservices**
+11. [**Spring Boot with Microservices**](#11-spring-boot-with-microservices)
     - Introduction to Microservices
     - Service Discovery (Eureka)
     - Load Balancing (Ribbon)
@@ -68,19 +68,19 @@
     - Circuit Breaker (Hystrix, Resilience4j)
     - Feign Clients
 
-12. **Spring Boot Profiles**
+12. [**Spring Boot Profiles**](#12-spring-boot-profiles)
     - Environment-Specific Configurations
     - @Profile Annotation
 
-13. **Spring Boot Caching**
+13. [**Spring Boot Caching**](#13-spring-boot-caching)
     - @Cacheable, @CacheEvict Annotations
     - Cache Manager (EhCache, Redis)
 
-14. **Spring Boot Scheduling**
+14. [**Spring Boot Scheduling**](#14-spring-boot-scheduling)
     - @Scheduled Annotation
     - Task Execution and Scheduling
 
-15. **Spring Boot Logging**
+15. [**Spring Boot Logging**](#15-spring-boot-logging)
     - Logback and Log4j2
     - Externalizing Log Configurations
 
